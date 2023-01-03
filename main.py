@@ -2,6 +2,7 @@ from settings import *
 from tetris import Tetris, Text
 import sys
 import pathlib
+import re
 
 
 class App:
@@ -17,9 +18,15 @@ class App:
 
     def load_images(self):
         files = [item for item in pathlib.Path(SPRITE_DIR_PATH).rglob('*.png') if item.is_file() ]
-        images = [pg.image.load(file).convert_alpha() for file in files]
-        images = [pg.transform.scale(image, (TILE_SIZE, TILE_SIZE)) for image in images]
-        return images
+        images =[]
+        img={}
+        for file in files:
+            match = re.search("^(.+?)_block.+?$", file.name)
+            if match:
+                color = match.group(1)            
+                img [color]=pg.transform.scale( pg.image.load(file).convert_alpha(), (TILE_SIZE, TILE_SIZE))
+                images.append(img)
+        return img
      
 
     def set_timer(self):
