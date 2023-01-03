@@ -44,6 +44,9 @@ class Tetris:
             if sum(map(bool, self.field_array[y])) < FIELD_W:
                 row -= 1
             else:
+                pg.mixer.Sound.play(self.app.sounds['explode'])
+                pg.mixer.music.stop()
+
                 for x in range(FIELD_W):
                     self.field_array[row][x].alive = False
                     self.field_array[row][x] = 0
@@ -64,6 +67,8 @@ class Tetris:
 
     def check_tetromino_landing(self ):
         if self.tetromino.landing:
+            pg.mixer.Sound.play(self.app.sounds['hit'])
+            pg.mixer.music.stop()
             if self.is_game_over():
                 self.__init__(self.app)
             else:

@@ -8,13 +8,22 @@ import re
 class App:
     def __init__(self) -> None:
         pg.init()
-        pg.display.set_caption("Tetris")
+        pg.display.set_caption("Tetris")        
         self.screen = pg.display.set_mode(WIN_RES)
         self.clock = pg.time.Clock() 
         self.set_timer()
         self.images = self.load_images()
+        self.sounds = self.load_sounds()        
         self.tetris = Tetris(self)
         self.text = Text(self)
+
+    def load_sounds(self):
+        files = [item for item in pathlib.Path(SOUND_DIR_PATH).rglob('*.wav') if item.is_file() ]
+        sounds={}
+        for file in files:
+            sound=file.name[:-4]
+            sounds[sound] = pg.mixer.Sound(file)
+        return sounds
 
     def load_images(self):
         files = [item for item in pathlib.Path(SPRITE_DIR_PATH).rglob('*.png') if item.is_file() ]

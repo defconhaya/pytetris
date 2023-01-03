@@ -7,6 +7,7 @@ FIELD_COLOR = (48, 39, 32)
 BG_COLOR = (24, 89, 117)
 
 SPRITE_DIR_PATH = 'sprites'
+SOUND_DIR_PATH = 'sounds'
 # FONTH_PATH ='fonts/ChubbyDotty.ttf'
 FONTH_PATH ='fonts/HennyPenny-Regular.ttf'
 
